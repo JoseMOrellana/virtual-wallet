@@ -1,0 +1,44 @@
+version: '3.8'
+
+# Services
+services:
+  # "service-client" service
+  servicedb:
+    build:
+      context: ./service-db
+      dockerfile: Dockerfile
+    container_name: service-db
+    ports:
+      - "4000:4000"
+    depends_on:
+      - mongodbdocker
+
+  # "service-client" service
+  serviceclient:
+    build:
+      context: ./service-client
+      dockerfile: Dockerfile
+    container_name: service-client
+    ports:
+      - "3000:3000"
+    depends_on:
+      - servicedb
+
+  # "Client" service
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+
+    container_name: frontend
+    ports:
+      - "5713:5713"
+    depends_on:
+      - serviceclient
+
+  # Database service
+  mongodbdocker:
+    image: mongo:latest
+    container_name: mongodb_server
+    ports:
+      - "27017:27017"
