@@ -4,7 +4,7 @@ Proyecto Virtual Wallet, aplicación que simula transacciones a una billetera vi
 Realizado con el stack MERN
 
 ## Recursos
-* [Video explicativo]([https://github.com/madhums/node-express-mongoose/wiki/Apps-built-using-this-approach](https://www.youtube.com/watch?v=UFF7CFerkPM))
+* [Video explicativo](https://www.youtube.com/watch?v=UFF7CFerkPM)
 * [Guia de google para crear contraseña de aplicaciones](https://knowledge.workspace.google.com/kb/how-to-create-app-passwords-000009237?hl=es-419) - Esto es necesario para configurar el envio de correos de la aplicación. Si no desea o no puede utilizar sus datos, yo puedo suministrarle mis datos para que pueda probar el envio de correos. Si no desea hacer uso del envio de correos, el server `service-db` imprime en consola el contenido de cualquier correo que no pueda ser enviado.
 * En la carpeta base se encuentra el archivo de la colección de postman con la documentación de los endpoints.
 
