@@ -1,0 +1,226 @@
+{
+	"info": {
+		"_postman_id": "0a83d327-3fe8-4e8a-849a-36f5c78c8ab0",
+		"name": "Virtual Wallet",
+		"description": "API del proyecto Virtual Wallet, cuenta con creación/autenticación de usuarios y creacion de transacciones financieras(deposito, pago) a una billetera virtual",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9460328"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"prueba@prueba.com\",\r\n    \"password\": \"12345678\",\r\n    \"document\": \"V12345678\",\r\n    \"name\": \"Prueba\",\r\n    \"phone\": \"0414-1234567\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						},
+						"description": "Crea un usuario. Los campos de email y document deben ser unicos."
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"prueba@prueba.com\",\r\n    \"password\": \"0987654321\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						},
+						"description": "Autentica un usuario. Se guarda un toke de sesion en forma de cookie"
+					},
+					"response": []
+				}
+			],
+			"description": "Los endpoints utilizados para la creación y autenticación de usuarios"
+		},
+		{
+			"name": "Wallet",
+			"item": [
+				{
+					"name": "Get Balance",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/wallet?document=1&phone=2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"wallet"
+							],
+							"query": [
+								{
+									"key": "document",
+									"value": "1"
+								},
+								{
+									"key": "phone",
+									"value": "2"
+								}
+							]
+						},
+						"description": "Retorna los datos de la billetera, siempre que los datos del documento y telefono coincidan con los ingresados por el usuario al momento de registrarse. Debe estar autenticado"
+					},
+					"response": []
+				}
+			],
+			"description": "Los endpoints referentes a las operaciones con la billetera"
+		},
+		{
+			"name": "Transaction",
+			"item": [
+				{
+					"name": "Deposit",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"amount\": 140\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/transaction/deposit",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"transaction",
+								"deposit"
+							]
+						},
+						"description": "Crea una transacción de tipo deposito. La transacción es guardada como \"DONE\" y el balance de la billetera se ve afectado automaticamente"
+					},
+					"response": []
+				},
+				{
+					"name": "Payment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"amount\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/transaction/payment",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"transaction",
+								"payment"
+							]
+						},
+						"description": "Crea una transacción de tipo pago. La transacción es guardada como \"PENDING\" y el usuario debe validar el pago para que el balance de la billetera se vea afectado"
+					},
+					"response": []
+				},
+				{
+					"name": "Validate Payment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"paymentToken\": \"0.2533\",\r\n    \"sessionToken\": \"511799f8fe26d5340c1323b4963db2330e98b64309a3ba22a4bde8a8e1046958\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/transaction/validate",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"transaction",
+								"validate"
+							]
+						},
+						"description": "Valida una transacción de tipo pago realizada previamente por el usuario. Si la validación es satisfactoria, el balance de la billetera se ve afectado"
+					},
+					"response": []
+				}
+			],
+			"description": "Los endpoints para realizar operaciones que afectan a la billetera"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "localhost:3000",
+			"type": "string"
+		}
+	]
+}
