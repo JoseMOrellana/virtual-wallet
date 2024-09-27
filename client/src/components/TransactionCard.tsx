@@ -30,7 +30,7 @@ export default function TransactionCard({ transaction } : TransactionCardProps) 
         }
 
     return (
-        <Card marginBottom={2} cursor={isClickable ? "pointer" : "default"} onClick={isClickable ? handleClick : () => {}}>
+        <Card variant="outline" marginBottom={2} cursor={isClickable ? "pointer" : "default"} onClick={isClickable ? handleClick : () => {}}>
             <CardBody>
                 <RowContainer>
                     <ColumnContainer>

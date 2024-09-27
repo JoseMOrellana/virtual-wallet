@@ -1,4 +1,4 @@
-import { Button, Heading, Input, InputGroup, InputLeftElement, Text } from "@chakra-ui/react";
+import { Button, Divider, Heading, Input, InputGroup, InputLeftElement, Text } from "@chakra-ui/react";
 import styled from "styled-components";
 import { useVirtualWalletStore } from "../store/virtualWallet";
 import FormInput from "../components/FormInput";
@@ -113,16 +113,17 @@ export default function Balance() {
                 <Button colorScheme="teal" onClick={handleSubmit(onSubmit)} width="100%">Confirm</Button>
             </FormContainer>
             {wallet && (
-                <>
+                <WalletContainer>
                     <Text fontWeight="bold">Wallet: {wallet.wallet._id}</Text>
                     <Text fontWeight="bold">Balance: {USDollar.format(wallet.wallet.balance)}</Text>
+                    <Divider marginBottom={4} />
                     <ListContainer>
                         {wallet.transactions.map((transaction) => (
                             <TransactionCard transaction={transaction} key={transaction._id} />
                         ))}
                     </ListContainer>
                     
-                </>
+                </WalletContainer>
             )}
         </Container>
     )
@@ -130,13 +131,20 @@ export default function Balance() {
 
 const Container = styled.div`
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     flex: 1;
 `
 
+const WalletContainer = styled.div`
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-left: 8px;
+`
+
 const ListContainer = styled.div`
-    max-height: 300px;
-    overflow-y: scroll
+    max-height: 400px;
+    overflow-y: scroll;
+    padding-right: 4px;
 `
